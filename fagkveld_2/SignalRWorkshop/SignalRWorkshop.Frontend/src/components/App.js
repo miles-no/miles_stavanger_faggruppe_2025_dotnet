@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   HubConnectionBuilder,
-  HubConnectionState,
   LogLevel,
 } from "@microsoft/signalr";
 import "./App.css";
