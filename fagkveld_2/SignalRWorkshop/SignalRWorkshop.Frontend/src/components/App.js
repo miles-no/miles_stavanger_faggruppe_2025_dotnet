@@ -1,37 +1,41 @@
 import { useEffect, useState } from "react";
-import { HubConnectionBuilder } from "@microsoft/signalr";
+import { HubConnectionBuilder, HubConnectionState } from "@microsoft/signalr";
 import "./App.css";
 
 function App() {
-  const [forecasts, setForecasts] = useState([]);
   const [message, setMessage] = useState("");
+  const [receiveMessage, setReceiveMessage] = useState("Initial message");
   const [connection, setConnection] = useState(null);
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl("/chat")
+      .withUrl("https://localhost:7094/chathub", {
+        withCredentials: false
+      })
       .withAutomaticReconnect()
       .build();
 
     setConnection(newConnection);
 
     newConnection.start()
-      .then(() => {
-        console.log("Connected to SignalR hub");
-      })
-      .catch((err) => console.log("Error connecting to SignalR hub: ", err));
+    .then(() => {
+      console.log("Connected to SignalR hub");
+      connection.on("ReceiveMessage", (msg) => {
+        console.log("Message received: ", msg);
+        setReceiveMessage(msg);
+      });
+    })
+    .catch((err) => console.log("Error connecting to SignalR hub: ", err));
   }, []);
-
+  
   const sendMessage = async () => {
-    if (connection) {
-      try {
-        await connection.invoke("SendMessage", message);
-        console.log("Message sent: ", message);
-      } catch (err) {
-        console.error("Error sending message: ", err);
-      }
-    }
-  };
+    await fetch(`/api/chat?message=${message}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+};
 
   return (
     <div className="App">
@@ -44,6 +48,7 @@ function App() {
           cols="50"
         ></textarea>
         <button onClick={sendMessage}>Send Message</button>
+        <p>{receiveMessage}</p>
       </header>
     </div>
   );
