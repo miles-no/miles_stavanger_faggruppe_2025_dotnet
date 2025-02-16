@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { HubConnectionBuilder, HubConnectionState } from "@microsoft/signalr";
+import {
+  HubConnectionBuilder,
+  HubConnectionState,
+  LogLevel,
+} from "@microsoft/signalr";
 import "./App.css";
 
 function App() {
@@ -10,24 +14,26 @@ function App() {
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
       .withUrl("https://localhost:7094/chathub", {
-        withCredentials: false
+        withCredentials: false,
       })
+      .configureLogging(LogLevel.Information)
       .withAutomaticReconnect()
       .build();
 
-    setConnection(newConnection);
+    newConnection.on("ReceiveMessage", (msg) => {
+      console.log("Message received: ", msg);
+      setReceiveMessage(msg);
+    });
 
-    newConnection.start()
-    .then(() => {
-      console.log("Connected to SignalR hub");
-      connection.on("ReceiveMessage", (msg) => {
-        console.log("Message received: ", msg);
-        setReceiveMessage(msg);
-      });
-    })
-    .catch((err) => console.log("Error connecting to SignalR hub: ", err));
+    try {
+      newConnection.start();
+    } catch (err) {
+      console.log("Error connecting to SignalR hub: ", err);
+    }
+
+    setConnection(newConnection);
   }, []);
-  
+
   const sendMessage = async () => {
     await fetch(`/api/chat?message=${message}`, {
       method: "POST",
@@ -35,7 +41,7 @@ function App() {
         "Content-Type": "application/json",
       },
     });
-};
+  };
 
   return (
     <div className="App">
