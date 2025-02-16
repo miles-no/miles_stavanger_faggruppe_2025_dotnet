@@ -1,33 +1,36 @@
 import { useEffect, useState } from "react";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 import "./App.css";
 
 function App() {
   const [forecasts, setForecasts] = useState([]);
-
-  const requestWeather = async () => {
-    const weather = await fetch("api/weatherforecast");
-    console.log(weather);
-
-    const weatherJson = await weather.json();
-    console.log(weatherJson);
-
-    setForecasts(weatherJson);
-  };
+  const [message, setMessage] = useState("");
+  const [connection, setConnection] = useState(null);
 
   useEffect(() => {
-    requestWeather();
+    const newConnection = new HubConnectionBuilder()
+      .withUrl("/chat")
+      .withAutomaticReconnect()
+      .build();
+
+    setConnection(newConnection);
+
+    newConnection.start()
+      .then(() => {
+        console.log("Connected to SignalR hub");
+      })
+      .catch((err) => console.log("Error connecting to SignalR hub: ", err));
   }, []);
 
-  const [message, setMessage] = useState("");
-
   const sendMessage = async () => {
-    await fetch("api/sendmessage", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    });
+    if (connection) {
+      try {
+        await connection.invoke("SendMessage", message);
+        console.log("Message sent: ", message);
+      } catch (err) {
+        console.error("Error sending message: ", err);
+      }
+    }
   };
 
   return (
