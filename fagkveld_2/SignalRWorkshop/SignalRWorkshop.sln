@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWorkshop.AppHost", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWorkshop.ServiceDefaults", "SignalRWorkshop.ServiceDefaults\SignalRWorkshop.ServiceDefaults.csproj", "{7378D4D8-50C9-484C-B62A-FB2C5F3CE946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWorkshop.Api", "SignalRWorkshop.Api\SignalRWorkshop.Api.csproj", "{3762BFFD-9BE9-4B40-932B-4507FF60A046}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWorkshop.Backend", "SignalRWorkshop.Backend\SignalRWorkshop.Backend.csproj", "{3160F883-5087-4E5C-BA04-510C848665BB}"
 EndProject
 Global
@@ -24,10 +22,6 @@ Global
 		{7378D4D8-50C9-484C-B62A-FB2C5F3CE946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7378D4D8-50C9-484C-B62A-FB2C5F3CE946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7378D4D8-50C9-484C-B62A-FB2C5F3CE946}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3762BFFD-9BE9-4B40-932B-4507FF60A046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3762BFFD-9BE9-4B40-932B-4507FF60A046}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3762BFFD-9BE9-4B40-932B-4507FF60A046}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3762BFFD-9BE9-4B40-932B-4507FF60A046}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3160F883-5087-4E5C-BA04-510C848665BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3160F883-5087-4E5C-BA04-510C848665BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3160F883-5087-4E5C-BA04-510C848665BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
