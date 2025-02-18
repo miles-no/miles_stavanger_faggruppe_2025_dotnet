@@ -6,7 +6,7 @@ builder.AddServiceDefaults();
 
 builder.Services.AddControllers();
 
-// Add CORS policy
+// Add CORS policy - don't use this in production ;)
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policyBuilder =>
