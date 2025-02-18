@@ -1,3 +1,5 @@
+using SignalRWorkshop.Backend.Chat;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
@@ -6,7 +8,9 @@ builder.AddServiceDefaults();
 
 builder.Services.AddControllers();
 
-// Add CORS policy - don't use this in production ;)
+builder.Services.AddSignalR();
+
+// Add CORS policy - don't use this in prod ;)
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policyBuilder =>
@@ -31,5 +35,7 @@ app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();
