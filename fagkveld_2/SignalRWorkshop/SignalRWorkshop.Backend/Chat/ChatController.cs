@@ -15,7 +15,7 @@ namespace SignalRWorkshop.Backend.Chat
         }
 
         [HttpPost]
-        public void SendMessage([FromServices] IHubContext<ChatHub, IChatClient> chatHub, string message)
+        public void SendMessage(string message)
         {
             chatHub.Clients.All.ReceiveMessage(message);
         }
