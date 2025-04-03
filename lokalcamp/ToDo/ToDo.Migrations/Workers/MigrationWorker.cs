@@ -51,12 +51,30 @@ namespace ToDo.Migrations.Workers
                 Id = Guid.NewGuid()
             };
 
+            UserStat userStat = new()
+            {
+                UserId = new Guid("b40bf22a-12c0-4358-b62a-4072f08a0579"),
+                Points = 0,
+                StreakDays = 0,
+                Level = 1
+            };
+
             var strategy = dbContext.Database.CreateExecutionStrategy();
             await strategy.ExecuteAsync(async () =>
             {
                 // Seed the database
                 await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
-                await dbContext.ToDos.AddAsync(todoItem, cancellationToken);
+
+                if (!dbContext.ToDos.Any())
+                {
+                    await dbContext.ToDos.AddAsync(todoItem, cancellationToken);
+                }
+
+                if (!dbContext.UserStats.Any())
+                {
+                    await dbContext.UserStats.AddAsync(userStat, cancellationToken);
+                }
+
                 await dbContext.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
             });

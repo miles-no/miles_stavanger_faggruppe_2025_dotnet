@@ -4,6 +4,10 @@ namespace ToDo.Business.Dtos
 {
     public class TodoDto
     {
+        public TodoDto()
+        {
+        }
+
         public TodoDto(TodoItem? todo)
         {
             Id = todo.Id;

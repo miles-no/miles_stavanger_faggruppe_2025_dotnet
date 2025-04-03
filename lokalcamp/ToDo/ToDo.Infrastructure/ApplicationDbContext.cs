@@ -10,9 +10,11 @@ namespace ToDo.Data
         {
         }
 
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+
+        public DbSet<UserStat> UserStats { get; set; }
 
         public DbSet<TodoItem> ToDos { get; set; }
     }

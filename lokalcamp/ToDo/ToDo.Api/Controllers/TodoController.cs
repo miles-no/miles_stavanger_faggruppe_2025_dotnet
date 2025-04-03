@@ -14,6 +14,12 @@ namespace ToDo.Api.Controllers
             return Ok(await service.GetAllAsync());
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            return Ok(await service.GetByIdAsync(id));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TodoDto todo)
         {
