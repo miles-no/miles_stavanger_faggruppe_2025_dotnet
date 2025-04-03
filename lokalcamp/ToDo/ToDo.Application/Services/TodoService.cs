@@ -14,7 +14,7 @@ namespace ToDo.Business.Services
 
         public async Task<TodoDto> AddAsync(TodoDto todo)
         {
-            var entity = new TodoItem { Title = todo.Title, Completed = todo.Completed };
+            var entity = new TodoItem { Title = todo.Title, Completed = todo.Completed, UserId = Domain.Constants.DefaultUserId };
             await todoRepository.AddAsync(entity);
             return new TodoDto(entity);
         }
@@ -49,7 +49,7 @@ namespace ToDo.Business.Services
             entity.CompletedAt = DateTime.UtcNow;
 
             // Update user stats
-            var userId = new Guid("b40bf22a-12c0-4358-b62a-4072f08a0579"); // only one user atm ;)
+            var userId = Domain.Constants.DefaultUserId; // only one user atm ;)
             var userStats = await userStatsRepository.GetByUserIdAsync(userId);
             userStats.Points += 10; // Earn 10 points per task
             userStats.StreakDays = UpdateStreak(userStats);

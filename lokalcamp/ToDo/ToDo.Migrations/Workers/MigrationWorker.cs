@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using OpenTelemetry.Trace;
 using ToDo.Data;
 using ToDo.Domain.Models;
@@ -46,7 +47,7 @@ namespace ToDo.Migrations.Workers
         {
             User user = new()
             {
-                Id = new Guid("b40bf22a-12c0-4358-b62a-4072f08a0579"),
+                Id = Domain.Constants.DefaultUserId,
                 Username = "testuser"
             };
 
@@ -55,12 +56,12 @@ namespace ToDo.Migrations.Workers
                 Completed = true,
                 Title = "Start workshop",
                 Id = Guid.NewGuid(),
-                UserId = new Guid("b40bf22a-12c0-4358-b62a-4072f08a0579"),
+                UserId = Domain.Constants.DefaultUserId,
             };
 
             UserStat userStat = new()
             {
-                UserId = new Guid("b40bf22a-12c0-4358-b62a-4072f08a0579"),
+                UserId = Domain.Constants.DefaultUserId,
                 Points = 0,
                 StreakDays = 0,
                 Level = 1
@@ -69,6 +70,7 @@ namespace ToDo.Migrations.Workers
             var strategy = dbContext.Database.CreateExecutionStrategy();
             await strategy.ExecuteAsync(async () =>
             {
+                // Flush tables
                 await dbContext.Database.ExecuteSqlRawAsync("DELETE FROM Users", cancellationToken);
                 await dbContext.Database.ExecuteSqlRawAsync("DELETE FROM ToDos", cancellationToken);
                 await dbContext.Database.ExecuteSqlRawAsync("DELETE FROM UserStats", cancellationToken);
