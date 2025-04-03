@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDo.Business.Dtos;
 using ToDo.Business.Services.Interfaces;
 
@@ -22,15 +21,16 @@ namespace ToDo.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] TodoDto todo)
+        public async Task<IActionResult> Update(Guid id, [FromBody] TodoDto todo)
         {
             return Ok(await service.UpdateAsync(id, todo));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(Guid id)
         {
-            return Ok(await service.DeleteAsync(id));
+            service.Delete(id);
+            return Ok();
         }
     }
 }

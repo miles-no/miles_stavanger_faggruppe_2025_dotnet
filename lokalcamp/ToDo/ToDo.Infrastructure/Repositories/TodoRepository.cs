@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDo.Data.Interfaces;
+using ToDo.Data.Repositories.Interfaces;
 using ToDo.Domain.Models;
 
 namespace ToDo.Data.Repositories
 {
     public class TodoRepository(ApplicationDbContext context) : ITodoRepository
     {
+        public async Task<TodoItem?> GetAsync(Guid id) 
+            => await context.ToDos.FindAsync(id);
+
         public async Task<List<TodoItem>> GetAllAsync()
             => await context.ToDos.ToListAsync();
 
@@ -15,14 +18,16 @@ namespace ToDo.Data.Repositories
             await context.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(TodoItem todo)
+        public async Task UpdateAsync(TodoItem todo)
         {
-            throw new NotImplementedException();
+            context.ToDos.Update(todo);
+            await context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var todoItem = context.ToDos.First(t => t.Id == id);
+            context.ToDos.Remove(todoItem);
         }
     }
 

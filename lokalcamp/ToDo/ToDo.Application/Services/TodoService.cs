@@ -1,6 +1,6 @@
 ﻿using ToDo.Business.Dtos;
 using ToDo.Business.Services.Interfaces;
-using ToDo.Data.Interfaces;
+using ToDo.Data.Repositories.Interfaces;
 using ToDo.Domain.Models;
 
 namespace ToDo.Business.Services
@@ -8,7 +8,9 @@ namespace ToDo.Business.Services
     public class TodoService(ITodoRepository repository) : ITodoService
     {
         public async Task<List<TodoDto>> GetAllAsync()
-            => (await repository.GetAllAsync()).Select(todo => new TodoDto(todo)).ToList();
+        {
+            return (await repository.GetAllAsync()).Select(todo => new TodoDto(todo)).ToList();
+        }
 
         public async Task<TodoDto> AddAsync(TodoDto todo)
         {
@@ -17,19 +19,22 @@ namespace ToDo.Business.Services
             return new TodoDto(entity);
         }
 
-        public Task<TodoDto> GetByIdAsync(int id)
+        public async Task<TodoDto?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await repository.GetAsync(id);
+            return entity != null ? new TodoDto(entity) : null;
         }
 
-        public Task<TodoDto> UpdateAsync(int id, TodoDto todo)
+        public async Task<TodoDto> UpdateAsync(Guid id, TodoDto todo)
         {
-            throw new NotImplementedException();
+            var entity = new TodoItem { Id = id, Title = todo.Title, Completed = todo.Completed };
+            await repository.UpdateAsync(entity);
+            return new TodoDto(entity);
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            repository.Delete(id);
         }
     }
 

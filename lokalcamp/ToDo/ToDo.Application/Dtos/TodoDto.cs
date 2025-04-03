@@ -4,7 +4,7 @@ namespace ToDo.Business.Dtos
 {
     public class TodoDto
     {
-        public TodoDto(TodoItem todo)
+        public TodoDto(TodoItem? todo)
         {
             Id = todo.Id;
             Title = todo.Title;

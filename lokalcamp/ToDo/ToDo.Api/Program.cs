@@ -1,8 +1,8 @@
 using ToDo.Business.Services;
 using ToDo.Business.Services.Interfaces;
 using ToDo.Data;
-using ToDo.Data.Interfaces;
 using ToDo.Data.Repositories;
+using ToDo.Data.Repositories.Interfaces;
 using ToDo.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);

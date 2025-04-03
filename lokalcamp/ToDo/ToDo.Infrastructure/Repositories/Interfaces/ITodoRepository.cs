@@ -1,12 +1,13 @@
 ﻿using ToDo.Domain.Models;
 
-namespace ToDo.Data.Interfaces
+namespace ToDo.Data.Repositories.Interfaces
 {
     public interface ITodoRepository
     {
         Task<List<TodoItem>> GetAllAsync();
         Task AddAsync(TodoItem todo);
         Task UpdateAsync(TodoItem todo);
-        Task DeleteAsync(int id);
+        void Delete(Guid id);
+        Task<TodoItem?> GetAsync(Guid id);
     }
 }
