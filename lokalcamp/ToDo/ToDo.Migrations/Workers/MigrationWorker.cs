@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+﻿using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Trace;
+using System.Diagnostics;
 using ToDo.Data;
 using ToDo.Domain.Models;
 
