@@ -44,11 +44,18 @@ namespace ToDo.Migrations.Workers
 
         private static async Task SeedDataAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
         {
+            User user = new()
+            {
+                Id = new Guid("b40bf22a-12c0-4358-b62a-4072f08a0579"),
+                Username = "testuser"
+            };
+
             TodoItem todoItem = new()
             {
                 Completed = true,
                 Title = "Start workshop",
-                Id = Guid.NewGuid()
+                Id = Guid.NewGuid(),
+                UserId = new Guid("b40bf22a-12c0-4358-b62a-4072f08a0579"),
             };
 
             UserStat userStat = new()
@@ -62,18 +69,16 @@ namespace ToDo.Migrations.Workers
             var strategy = dbContext.Database.CreateExecutionStrategy();
             await strategy.ExecuteAsync(async () =>
             {
+                await dbContext.Database.ExecuteSqlRawAsync("DELETE FROM Users", cancellationToken);
+                await dbContext.Database.ExecuteSqlRawAsync("DELETE FROM ToDos", cancellationToken);
+                await dbContext.Database.ExecuteSqlRawAsync("DELETE FROM UserStats", cancellationToken);
+
                 // Seed the database
                 await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
 
-                if (!dbContext.ToDos.Any())
-                {
-                    await dbContext.ToDos.AddAsync(todoItem, cancellationToken);
-                }
-
-                if (!dbContext.UserStats.Any())
-                {
-                    await dbContext.UserStats.AddAsync(userStat, cancellationToken);
-                }
+                await dbContext.Users.AddAsync(user, cancellationToken);
+                await dbContext.ToDos.AddAsync(todoItem, cancellationToken);
+                await dbContext.UserStats.AddAsync(userStat, cancellationToken);
 
                 await dbContext.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);

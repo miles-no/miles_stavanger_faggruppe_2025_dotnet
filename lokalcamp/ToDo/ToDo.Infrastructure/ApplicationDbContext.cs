@@ -14,8 +14,22 @@ namespace ToDo.Data
         {
         }
 
+        public DbSet<User> Users { get; set; }
+
         public DbSet<UserStat> UserStats { get; set; }
 
         public DbSet<TodoItem> ToDos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.TodoItems)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId);
+
+            modelBuilder.Entity<UserStat>()
+                .HasOne(u => u.User)
+                .WithOne(t => t.UserStat);
+        }
     }
 }
