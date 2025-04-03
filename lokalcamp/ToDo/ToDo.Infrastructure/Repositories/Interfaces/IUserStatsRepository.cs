@@ -6,5 +6,6 @@ namespace ToDo.Data.Repositories.Interfaces
     {
         Task<UserStat> GetByUserIdAsync(Guid userId);
         Task UpdateAsync(UserStat userStat);
+        Task<List<UserStat>> GetTopUsersByPointsAsync(int numberOfUsersToFetch);
     }
 }

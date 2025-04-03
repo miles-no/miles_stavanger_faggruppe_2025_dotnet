@@ -11,5 +11,11 @@ namespace ToDo.Business.Services
             var entity = await userStatsRepository.GetByUserIdAsync(id);
             return new UserStatsDto(entity);
         }
+
+        public async Task<List<UserStatsDto>> GetLeaderboardAsync(int numberOfUsersToFetch)
+        {
+            var topUsers = await userStatsRepository.GetTopUsersByPointsAsync(numberOfUsersToFetch);
+            return topUsers.Select(u => new UserStatsDto(u)).ToList();
+        }
     }
 }

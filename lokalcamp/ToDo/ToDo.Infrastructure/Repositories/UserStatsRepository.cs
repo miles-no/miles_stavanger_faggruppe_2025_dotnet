@@ -14,5 +14,13 @@ namespace ToDo.Data.Repositories
             context.UserStats.Update(userStat);
             await context.SaveChangesAsync();
         }
+
+        public async Task<List<UserStat>> GetTopUsersByPointsAsync(int numberOfUsersToFetch)
+        {
+            return await context.UserStats
+                .OrderByDescending(u => u.Points)
+                .Take(numberOfUsersToFetch)
+                .ToListAsync();
+        }
     }
 }
