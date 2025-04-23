@@ -23,6 +23,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.MapPrometheusScrapingEndpoint();
+
 app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.

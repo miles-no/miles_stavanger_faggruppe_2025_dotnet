@@ -10,4 +10,8 @@
     <ProjectReference Include="..\GrafanaWorkshop.ServiceDefaults\GrafanaWorkshop.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.11.2-beta.1" />
+  </ItemGroup>
+
 </Project>
