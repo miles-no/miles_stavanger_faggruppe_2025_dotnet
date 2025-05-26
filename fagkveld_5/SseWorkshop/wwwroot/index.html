@@ -2,44 +2,142 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Next Week Close-Approach Objects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<style>
-    ul {
-        display: flex;
-        flex-direction: row;
-        list-style: none;
-        flex-wrap: wrap;
-        width: 90%;
-        gap: 1rem;
-        padding: 0;
-    }
+<body class="bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen p-4 sm:p-8">
 
-    li {
-        font-size: 2rem;
-    }
-</style>
-<body>
+    <div class="container mx-auto max-w-6xl">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-center mb-8 sm:mb-12 text-blue-300 drop-shadow-lg">
+            <span class="block">🚀 NASA Next Week</span>
+            <span class="block">Close-Approach Objects</span>
+        </h1>
 
-<h1>NASA Next Week Close-Approach Objects</h1>
-<ul id="objects">
-</ul>
+        <div id="loading-indicator" class="flex justify-center items-center h-48 text-blue-400">
+            <svg class="animate-spin -ml-1 mr-3 h-10 w-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="text-xl">Loading objects...</span>
+        </div>
 
-<script>
-    const eventSource = new EventSource('/objects');
-    const angelsList = document.getElementById('objects');
+        <ul id="objects" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        </ul>
 
-    eventSource.addEventListener('object', event => {
-        const li = document.createElement('li');
-        console.log(event);
-        li.textContent = event.data;
-        angelsList.appendChild(li);
-    });
+        <div id="message-box" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-xl border border-red-500 max-w-md w-full text-center">
+                <h3 id="message-title" class="text-2xl font-bold mb-4 text-red-400"></h3>
+                <p id="message-content" class="text-gray-300 mb-6"></p>
+                <button id="message-close-button" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md shadow-md transition duration-300 ease-in-out">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 
-    eventSource.onerror = error => {
-        console.error('EventSource failed:', error);
-        eventSource.close();
-    };
+    <script>
+        // Initialize EventSource to connect to the server for real-time updates
+        const eventSource = new EventSource('/objects');
+        // Get references to the HTML elements
+        const objectsList = document.getElementById('objects');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const messageBox = document.getElementById('message-box');
+        const messageTitle = document.getElementById('message-title');
+        const messageContent = document.getElementById('message-content');
+        const messageCloseButton = document.getElementById('message-close-button');
+
+        /**
+         * Displays a custom message box.
+         * @param {string} title - The title of the message.
+         * @param {string} content - The content of the message.
+         */
+        function showMessageBox(title, content) {
+            messageTitle.textContent = title;
+            messageContent.textContent = content;
+            messageBox.classList.remove('hidden');
+        }
+
+        /**
+         * Hides the custom message box.
+         */
+        function hideMessageBox() {
+            messageBox.classList.add('hidden');
+        }
+
+        // Add event listener to close the message box
+        messageCloseButton.addEventListener('click', hideMessageBox);
+
+        // Listen for 'object' events from the EventSource
+        eventSource.addEventListener('object', event => {
+            // Hide loading indicator once data is received
+            loadingIndicator.classList.add('hidden');
+            // Clear existing list items before adding new ones
+            objectsList.innerHTML = '';
+
+            try {
+                // Parse the incoming JSON data
+                const data = JSON.parse(event.data);
+                const fields = data.fields;
+                const objects = data.data;
+
+                // Check if data is valid and not empty
+                if (!objects || objects.length === 0) {
+                    objectsList.innerHTML = '<li class="col-span-full text-center text-gray-400 text-lg">No close-approach objects to display for next week.</li>';
+                    return;
+                }
+
+                // Map field names to their indices for easier access
+                const fieldMap = {};
+                fields.forEach((field, index) => {
+                    fieldMap[field] = index;
+                });
+
+                // Iterate over each object and create a list item
+                objects.forEach(obj => {
+                    const li = document.createElement('li');
+                    // Add Tailwind CSS classes for card-like styling
+                    li.className = 'bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out border border-gray-700 hover:border-blue-500';
+
+                    // Extract relevant data using the field map
+                    const designation = obj[fieldMap['des']] || 'N/A';
+                    const closeApproachDate = obj[fieldMap['cd']] || 'N/A';
+                    const distanceAU = parseFloat(obj[fieldMap['dist']]).toFixed(6) || 'N/A'; // Distance in Astronomical Units
+                    const relativeVelocity = parseFloat(obj[fieldMap['v_rel']]).toFixed(2) || 'N/A'; // Velocity in km/s
+
+                    // Populate the list item with formatted content
+                    li.innerHTML = `
+                            <h2 class="text-2xl font-bold text-blue-300 mb-2">${designation}</h2>
+                            <p class="text-gray-300 text-sm mb-1"><strong>Close Approach:</strong> ${closeApproachDate}</p>
+                            <p class="text-gray-300 text-sm mb-1"><strong>Distance:</strong> ${distanceAU} AU</p>
+                            <p class="text-gray-300 text-sm"><strong>Relative Velocity:</strong> ${relativeVelocity} km/s</p>
+                        `;
+                    objectsList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error parsing event data:', error);
+                showMessageBox('Data Error', 'Failed to process incoming data. Please check the console for details.');
+            }
+        });
+
+        // Handle EventSource errors
+        eventSource.onerror = error => {
+            console.error('EventSource failed:', error);
+            loadingIndicator.classList.add('hidden'); // Hide loading even on error
+            showMessageBox('Connection Error', 'Failed to connect to the server for updates. Please try refreshing the page.');
+            eventSource.close(); // Close the connection on error
+        };
+
+        // Initial check for loading state
+        if (objectsList.innerHTML === '') {
+            loadingIndicator.classList.remove('hidden');
+        }
     </script>
 
 </body>
