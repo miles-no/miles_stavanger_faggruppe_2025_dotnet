@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SseWorkshop", "SseWorkshop.csproj", "{7F69D483-AEA6-42DF-A509-E7685539044C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F69D483-AEA6-42DF-A509-E7685539044C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F69D483-AEA6-42DF-A509-E7685539044C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F69D483-AEA6-42DF-A509-E7685539044C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F69D483-AEA6-42DF-A509-E7685539044C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {575D0F08-E415-40B7-86A0-CE65B4F3A8AF}
+	EndGlobalSection
+EndGlobal

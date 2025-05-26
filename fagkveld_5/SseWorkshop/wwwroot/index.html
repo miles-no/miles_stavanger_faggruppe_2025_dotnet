@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    ul {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        flex-wrap: wrap;
+        width: 90%;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    li {
+        font-size: 2rem;
+    }
+</style>
+<body>
+
+<h1>NASA Next Week Close-Approach Objects</h1>
+<ul id="objects">
+</ul>
+
+<script>
+    const eventSource = new EventSource('/objects');
+    const angelsList = document.getElementById('objects');
+
+    eventSource.addEventListener('object', event => {
+        const li = document.createElement('li');
+        console.log(event);
+        li.textContent = event.data;
+        angelsList.appendChild(li);
+    });
+
+    eventSource.onerror = error => {
+        console.error('EventSource failed:', error);
+        eventSource.close();
+    };
+    </script>
+
+</body>
+</html>
