@@ -9,7 +9,7 @@ namespace SseWorkshop.Workers
             while (!cancellationToken.IsCancellationRequested)
             {
 
-                await closeApproachService.UpdateCloseApproachDataAsync(cancellationToken);
+                await closeApproachService.RefreshCloseApproachDataAsync(cancellationToken);
                 await Task.Delay(60*1000, cancellationToken);
             }
         }

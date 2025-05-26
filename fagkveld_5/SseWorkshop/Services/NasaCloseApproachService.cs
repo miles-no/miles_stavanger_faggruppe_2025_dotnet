@@ -1,7 +1,7 @@
-﻿using SseWorkshop.External.NasaWeather;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using SseWorkshop.External.Nasa;
 
 namespace SseWorkshop.Services
 {
@@ -42,12 +42,18 @@ namespace SseWorkshop.Services
             }
         }
 
-        public async Task UpdateCloseApproachDataAsync(CancellationToken cancellationToken)
+        public async Task RefreshCloseApproachDataAsync(CancellationToken cancellationToken)
         {
-            Current = await FetchWeatherFromNasaAsync(cancellationToken);
+            var nasaCloseApproachData = await FetchDataFromNasaAsync(cancellationToken);
+            if (nasaCloseApproachData is null)
+            {
+                return;
+            }
+
+            Current = nasaCloseApproachData;
         }
 
-        public async Task<NasaCloseApproachData?> FetchWeatherFromNasaAsync(CancellationToken cancellationToken)
+        public async Task<NasaCloseApproachData?> FetchDataFromNasaAsync(CancellationToken cancellationToken)
         {
             using var response = await _httpClient.GetAsync(NasaApiUrl, cancellationToken);
             response.EnsureSuccessStatusCode();

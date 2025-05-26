@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SseWorkshop.External.NasaWeather
+namespace SseWorkshop.External.Nasa
 {
     public partial class NasaCloseApproachData
     {
