@@ -7,7 +7,8 @@ namespace SseWorkshop.Services
 {
     public class NasaCloseApproachService : INotifyPropertyChanged
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
+        // Not the best practice to use a static HttpClient ;D but for simplicity in this example
+        private static readonly HttpClient _httpClient = new();
         private string NasaApiUrl = $"https://ssd-api.jpl.nasa.gov/cad.api?date-min={DateTime.Now:yyyy-MM-dd}&date-max={DateTime.Now.AddDays(7):yyyy-MM-dd}&dist-max=0.05&nea=true";
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -25,21 +26,7 @@ namespace SseWorkshop.Services
         public async IAsyncEnumerable<NasaCloseApproachData> GetCurrent(
             [EnumeratorCancellation] CancellationToken ct)
         {
-            while (ct is not { IsCancellationRequested: true })
-            {
-                yield return Current;
-                var tcs = new TaskCompletionSource();
-                PropertyChangedEventHandler handler = (_, _) => tcs.SetResult();
-                PropertyChanged += handler;
-                try
-                {
-                    await tcs.Task.WaitAsync(ct);
-                }
-                finally
-                {
-                    PropertyChanged -= handler;
-                }
-            }
+            // TODO: Implement IAsyncEnumerable for server sent events
         }
 
         public async Task RefreshCloseApproachDataAsync(CancellationToken cancellationToken)
@@ -53,7 +40,12 @@ namespace SseWorkshop.Services
             Current = nasaCloseApproachData;
         }
 
-        public async Task<NasaCloseApproachData?> FetchDataFromNasaAsync(CancellationToken cancellationToken)
+        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private async Task<NasaCloseApproachData?> FetchDataFromNasaAsync(CancellationToken cancellationToken)
         {
             using var response = await _httpClient.GetAsync(NasaApiUrl, cancellationToken);
             response.EnsureSuccessStatusCode();
@@ -61,11 +53,6 @@ namespace SseWorkshop.Services
             var jsonString = await response.Content.ReadAsStringAsync(cancellationToken);
 
             return JsonSerializer.Deserialize<NasaCloseApproachData>(jsonString);
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

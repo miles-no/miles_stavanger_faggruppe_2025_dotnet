@@ -15,10 +15,8 @@ app.UseHttpsRedirection();
 
 app.UseDefaultFiles().UseStaticFiles();
 
-app.MapGet("/objects", (NasaCloseApproachService objects, CancellationToken token) =>
-    TypedResults.ServerSentEvents(
-        objects.GetCurrent(token),
-        eventType: "object")
+app.MapGet("/objects", (NasaCloseApproachService objects, CancellationToken cancellationToken) =>
+    // TODO: Implement server sent events
 );
 
 app.Run();
