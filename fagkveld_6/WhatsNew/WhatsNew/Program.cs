@@ -1,3 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+using WhatsNew.Scenarios.Records;
 
-Console.WriteLine("Hello, World!");
+// WhatsNew demo launcher – currently focusing on Records
+RecordsDemo.Run();
