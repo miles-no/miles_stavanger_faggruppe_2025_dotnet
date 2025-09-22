@@ -1,5 +1,6 @@
 ﻿
 using WhatsNew.Scenarios.Records;
+using WhatsNew.Scenarios.PrimaryConstructors;
 
-// WhatsNew demo launcher – currently focusing on Records
 RecordsDemo.Run();
+PrimaryConstructorsDemo.Run();
