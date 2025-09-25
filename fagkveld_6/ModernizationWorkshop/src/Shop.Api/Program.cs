@@ -60,8 +60,7 @@ static void SeedData(IServiceProvider services)
     var ada = new Customer { Name = "Ada Lovelace", Email = "ada@example.com" };
     customers.Add(ada);
 
-    // Demonstrate C# 14 null-conditional assignment feature (old way shown for contrast)
     var demoCustomer = new CustomerWithLastOrder(ada.Name);
-    NullConditionalAssignmentDemo.AssignOrderOldWay(demoCustomer);
+    NullConditionalAssignmentDemo.AssignOrder(demoCustomer);
     Console.WriteLine($"\u001b[36mDemo (old way) LastOrder status: {demoCustomer.LastOrder?.Status ?? "null"}\u001b[0m");
 }
