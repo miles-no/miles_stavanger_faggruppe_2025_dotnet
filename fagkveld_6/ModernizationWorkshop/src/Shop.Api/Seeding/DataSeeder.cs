@@ -31,12 +31,44 @@ public static class DataSeeder
             products.Add(p);
         }
 
-        // Seed a default customer
-        var ada = new Customer { Name = "Ada Lovelace", Email = "ada@example.com" };
-        customers.Add(ada);
+        // Seed a default customer if none exist
+        if (!customers.GetAll().Any())
+        {
+            var ada = new Customer { Name = "Ada Lovelace", Email = "ada@example.com" };
+            customers.Add(ada);
 
-        var demoCustomer = new CustomerWithLastOrder(ada.Name);
-        NullConditionalAssignmentDemo.AssignOrder(demoCustomer);
-        Console.WriteLine($"\u001b[36mDemo (old way) LastOrder status: {demoCustomer.LastOrder?.Status ?? "null"}\u001b[0m");
+            var demoCustomer = new CustomerWithLastOrder(ada.Name);
+            NullConditionalAssignmentDemo.AssignOrder(demoCustomer);
+            Console.WriteLine($"\u001b[36mDemo LastOrder status: {demoCustomer.LastOrder?.Status ?? "null"}\u001b[0m");
+        }
+
+        // Seed an initial order (idempotent)
+        SeedInitialOrder(services);
+    }
+    
+    public static void SeedInitialOrder(IServiceProvider services)
+    {
+        using var scope = services.CreateScope();
+        var orders = scope.ServiceProvider.GetRequiredService<IOrderRepository>();
+        var customers = scope.ServiceProvider.GetRequiredService<ICustomerRepository>();
+        var catalog = scope.ServiceProvider.GetRequiredService<Catalog>();
+
+        var customer = customers.GetAll().FirstOrDefault();
+        if (customer is null) return; 
+
+        // Avoid duplicating if an order already exists for this customer
+        if (orders.GetAll().Any(o => o.CustomerId == customer.Id)) return;
+
+        var product = catalog.Products.FirstOrDefault();
+        if (product is null) return;
+
+        var order = new Order
+        {
+            CustomerId = customer.Id,
+            Items = new List<OrderItem> { new() { ProductId = product.Id, Quantity = 2 } },
+            Status = "Received"
+        };
+
+        orders.Add(order);
     }
 }
