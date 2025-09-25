@@ -114,20 +114,23 @@ public class OrderService
     }
 
     // Old-style polling updates; will be turned into async streams + yield in ServicesNew.cs
-    public async IAsyncEnumerable<string> ProcessOrderAsync(Guid id, CancellationToken ct = default)
+    public async Task<IEnumerable<string>> ProcessOrderAsync(Guid id, CancellationToken ct = default)
     {
         var order = _orders.Get(id) ?? throw new InvalidOperationException("Order not found");
+        var events = new List<string>();
 
         order.Status = "Brewing"; _orders.Update(order);
-        yield return "Brewing";
+        events.Add("Brewing");
         await Task.Delay(200, ct);
 
         order.Status = "Packing"; _orders.Update(order);
-        yield return "Packing";
+        events.Add("Packing");
         await Task.Delay(200, ct);
 
         order.Status = "Ready"; _orders.Update(order);
-        yield return "Ready";
+        events.Add("Ready");
         await Task.Delay(200, ct);
+
+        return events;
     }
 }
