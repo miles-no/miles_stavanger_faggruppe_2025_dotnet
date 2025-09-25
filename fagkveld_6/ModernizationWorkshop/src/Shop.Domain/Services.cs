@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace Shop.Domain;
 
-// Service classes only (repositories/interfaces moved to Repositories folder)
-
 public class PricingService
 {
     private readonly Catalog _catalog;

@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Api", "src\Shop.Api\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Domain", "src\Shop.Domain\Shop.Domain.csproj", "{15B3D168-DC30-408F-A07C-FE98FCD120D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Benchmarks", "benchmarks\Shop.Benchmarks\Shop.Benchmarks.csproj", "{44A0557A-0927-4935-A30F-98E602D4FF77}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,18 +43,6 @@ Global
 		{15B3D168-DC30-408F-A07C-FE98FCD120D8}.Release|x64.Build.0 = Release|Any CPU
 		{15B3D168-DC30-408F-A07C-FE98FCD120D8}.Release|x86.ActiveCfg = Release|Any CPU
 		{15B3D168-DC30-408F-A07C-FE98FCD120D8}.Release|x86.Build.0 = Release|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Debug|x64.Build.0 = Debug|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Debug|x86.Build.0 = Debug|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Release|x64.ActiveCfg = Release|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Release|x64.Build.0 = Release|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Release|x86.ActiveCfg = Release|Any CPU
-		{44A0557A-0927-4935-A30F-98E602D4FF77}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +50,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3F5B2978-9380-49FB-B0A0-F77CBAB30D38} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{15B3D168-DC30-408F-A07C-FE98FCD120D8} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
-		{44A0557A-0927-4935-A30F-98E602D4FF77} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

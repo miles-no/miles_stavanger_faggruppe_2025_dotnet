@@ -1,6 +1,5 @@
 namespace Shop.Domain;
 
-// Demonstrates C# 14 null-conditional assignment target: customer?.LastOrder = GetOrder();
 public class CustomerWithLastOrder
 {
     public CustomerWithLastOrder(string name)
