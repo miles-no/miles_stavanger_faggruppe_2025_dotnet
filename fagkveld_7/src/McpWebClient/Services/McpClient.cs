@@ -1,8 +1,8 @@
-using SimpleMcpServer.Models;
+using McpWebClient.Models;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace SimpleMcpServer.Services;
+namespace McpWebClient.Services;
 
 /// <summary>
 /// Handles JSON-RPC communication with the MCP server.

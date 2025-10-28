@@ -1,8 +1,8 @@
 using OpenAI.Chat;
-using SimpleMcpServer.Models;
+using McpWebClient.Models;
 using System.Text.Json.Nodes;
 
-namespace SimpleMcpServer.Services;
+namespace McpWebClient.Services;
 
 /// <summary>
 /// Main service that orchestrates the chat flow.

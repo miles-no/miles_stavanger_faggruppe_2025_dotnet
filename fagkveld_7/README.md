@@ -16,7 +16,7 @@ Model Context Protocol (MCP) is an open protocol that enables AI assistants to c
 dotnet build McpChatSolution.sln
 
 # Run the application
-cd src/SimpleMcpServer
+cd src/McpWebClient
 ASPNETCORE_ENVIRONMENT=Development dotnet run
 
 # Open browser to http://localhost:5000
@@ -35,11 +35,11 @@ fagkveld_7/
 ├── McpChatSolution.sln          # Solution file
 ├── README.md                     # This file
 └── src/
-    ├── SimpleMcpServer/          # Web application (chat interface)
+    ├── McpWebClient/             # Web application (chat interface)
     │   ├── Program.cs            # Application entry point (78 lines)
     │   ├── appsettings.json      # Base configuration
     │   ├── appsettings.Development.json  # Development settings with API key
-    │   ├── SimpleMcpServer.csproj
+    │   ├── McpWebClient.csproj
     │   ├── Models/               # Data models
     │   │   ├── AzureOpenAISettings.cs
     │   │   ├── ChatRequest.cs
@@ -64,7 +64,7 @@ fagkveld_7/
 
 ## ⚙️ Configuration
 
-Edit `src/SimpleMcpServer/appsettings.Development.json`:
+Edit `src/McpWebClient/appsettings.Development.json`:
 
 ```json
 {
@@ -99,7 +99,7 @@ Edit `src/SimpleMcpServer/appsettings.Development.json`:
 
 Each component has a single, clear responsibility:
 
-- **ChatService.cs** (src/SimpleMcpServer/Services/ChatService.cs:30-105)
+- **ChatService.cs** (src/McpWebClient/Services/ChatService.cs:30-105)
   - Orchestrates the full chat flow
   - Coordinates between Azure AI and MCP tools
 
@@ -139,7 +139,7 @@ curl -X POST http://localhost:5000/api/chat \
 ## 🔧 Troubleshooting
 
 ### "API key is not configured" error
-- Check `src/SimpleMcpServer/appsettings.Development.json` has the API key
+- Check `src/McpWebClient/appsettings.Development.json` has the API key
 - Ensure you're running with `ASPNETCORE_ENVIRONMENT=Development`
 - Verify the JSON format is correct (no trailing commas)
 

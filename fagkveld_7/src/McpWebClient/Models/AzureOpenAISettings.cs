@@ -1,4 +1,4 @@
-namespace SimpleMcpServer.Models;
+namespace McpWebClient.Models;
 
 /// <summary>
 /// Configuration settings for Azure OpenAI connection.

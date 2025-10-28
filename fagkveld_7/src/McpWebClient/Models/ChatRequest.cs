@@ -1,4 +1,4 @@
-namespace SimpleMcpServer.Models;
+namespace McpWebClient.Models;
 
 /// <summary>
 /// Represents an incoming chat request from the web client.

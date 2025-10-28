@@ -1,4 +1,4 @@
-namespace SimpleMcpServer.Models;
+namespace McpWebClient.Models;
 
 /// <summary>
 /// Represents a tool available from the MCP server.

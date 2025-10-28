@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace SimpleMcpServer.Services;
+namespace McpWebClient.Services;
 
 /// <summary>
 /// Manages the lifecycle of the MCP server process.

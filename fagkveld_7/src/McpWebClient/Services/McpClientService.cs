@@ -1,7 +1,7 @@
-using SimpleMcpServer.Models;
+using McpWebClient.Models;
 using System.Text.Json.Nodes;
 
-namespace SimpleMcpServer.Services;
+namespace McpWebClient.Services;
 
 /// <summary>
 /// Hosted service that manages the MCP (Model Context Protocol) connection.

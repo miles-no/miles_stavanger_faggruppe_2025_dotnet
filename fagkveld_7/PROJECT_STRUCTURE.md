@@ -8,8 +8,8 @@ fagkveld_7/                          # Solution root
 ├── README.md                        # Main documentation
 ├── MCP_ARCHITECTURE.md             # Architecture details
 └── src/                            # Source code folder
-    ├── SimpleMcpServer/            # Project 1: Web Application (MCP Client)
-    │   ├── SimpleMcpServer.csproj
+    ├── McpWebClient/               # Project 1: Web Application (MCP Client)
+    │   ├── McpWebClient.csproj
     │   ├── Program.cs              # ASP.NET Core entry point (78 lines)
     │   ├── appsettings.json
     │   ├── appsettings.Development.json
@@ -32,7 +32,7 @@ fagkveld_7/                          # Solution root
 
 ## What Each Project Does
 
-### SimpleMcpServer (Web Application)
+### McpWebClient (Web Application)
 
 **Type:** ASP.NET Core Web App
 **Role:** MCP **Client**
@@ -79,7 +79,7 @@ fagkveld_7/                          # Solution root
                       │ HTTP
                       ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                    SimpleMcpServer                           │
+│                    McpWebClient                              │
 │                   (ASP.NET Core Web App)                     │
 │  ┌──────────────────────────────────────────────────────┐  │
 │  │ ChatService.cs                                        │  │
@@ -121,13 +121,13 @@ fagkveld_7/                          # Solution root
 ### ✅ Correct (Current Structure)
 ```
 src/
-├── SimpleMcpServer/    ← Separate folder
+├── McpWebClient/       ← Separate folder
 └── McpServer/          ← Separate folder (sibling)
 ```
 
 ### ❌ Wrong (Old Structure - Now Fixed)
 ```
-SimpleMcpServer/
+McpWebClient/
 ├── Program.cs
 └── McpServer/          ← Nested inside! Confusing!
     └── Program.cs
@@ -135,21 +135,21 @@ SimpleMcpServer/
 
 ## Build Relationship
 
-Even though they're separate projects, SimpleMcpServer **depends on** McpServer:
+Even though they're separate projects, McpWebClient **depends on** McpServer:
 
-**SimpleMcpServer.csproj** contains:
+**McpWebClient.csproj** contains:
 ```xml
 <Target Name="BuildMcpServer" BeforeTargets="Build">
   <Exec Command="dotnet build $(ProjectDir)../McpServer/McpServer.csproj" />
 </Target>
 
 <Target Name="CopyMcpServer" AfterTargets="Build">
-  <!-- Copies McpServer.dll to SimpleMcpServer/bin/Debug/net9.0/McpServer/ -->
+  <!-- Copies McpServer.dll to McpWebClient/bin/Debug/net9.0/McpServer/ -->
 </Target>
 ```
 
 **Why?**
-- SimpleMcpServer needs to launch McpServer.dll at runtime
+- McpWebClient needs to launch McpServer.dll at runtime
 - The build process automatically copies McpServer to the right location
 - Both projects are included in the solution for easy development
 
@@ -161,12 +161,12 @@ Even though they're separate projects, SimpleMcpServer **depends on** McpServer:
 dotnet build McpChatSolution.sln
 
 # Run the web app (it will launch MCP server automatically)
-cd src/SimpleMcpServer
+cd src/McpWebClient
 ASPNETCORE_ENVIRONMENT=Development dotnet run
 ```
 
 **What happens:**
-1. SimpleMcpServer starts
+1. McpWebClient starts
 2. Reads `appsettings.Development.json` for Azure config
 3. Launches `McpServer.dll` as a child process
 4. Opens HTTP server on port 5000
@@ -174,13 +174,13 @@ ASPNETCORE_ENVIRONMENT=Development dotnet run
 
 ## Summary
 
-| Aspect | SimpleMcpServer | McpServer |
-|--------|-----------------|-----------|
+| Aspect | McpWebClient | McpServer |
+|--------|--------------|-----------|
 | **Type** | Web Application | Console Application |
 | **Role** | MCP Client | MCP Server |
 | **Protocol** | HTTP (for web) + JSON-RPC (to MCP) | JSON-RPC (stdin/stdout) |
 | **Runs** | Main process | Child process |
-| **Location** | `src/SimpleMcpServer/` | `src/McpServer/` |
+| **Location** | `src/McpWebClient/` | `src/McpServer/` |
 | **Purpose** | User interface & orchestration | Provides tools for AI |
 | **Dependencies** | Depends on McpServer | Standalone |
 

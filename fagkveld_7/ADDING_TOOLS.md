@@ -47,7 +47,7 @@ public static string MethodName()
 
 ```bash
 dotnet build McpChatSolution.sln
-cd src/SimpleMcpServer
+cd src/McpWebClient
 dotnet run
 ```
 
@@ -235,7 +235,7 @@ public static string Add(
 ### Method 1: Check Tool Discovery
 
 ```bash
-cd src/SimpleMcpServer
+cd src/McpWebClient
 dotnet run
 
 # In another terminal:
@@ -368,7 +368,7 @@ public static class MyTools
 **Then build and run:**
 ```bash
 dotnet build
-cd src/SimpleMcpServer
+cd src/McpWebClient
 dotnet run
 ```
 

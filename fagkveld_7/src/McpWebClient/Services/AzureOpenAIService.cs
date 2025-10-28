@@ -2,10 +2,10 @@ using Azure;
 using Azure.AI.OpenAI;
 using Microsoft.Extensions.Options;
 using OpenAI.Chat;
-using SimpleMcpServer.Models;
+using McpWebClient.Models;
 using System.ClientModel;
 
-namespace SimpleMcpServer.Services;
+namespace McpWebClient.Services;
 
 /// <summary>
 /// Service for interacting with Azure OpenAI.

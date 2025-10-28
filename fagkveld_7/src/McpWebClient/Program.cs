@@ -1,5 +1,5 @@
-using SimpleMcpServer.Models;
-using SimpleMcpServer.Services;
+using McpWebClient.Models;
+using McpWebClient.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

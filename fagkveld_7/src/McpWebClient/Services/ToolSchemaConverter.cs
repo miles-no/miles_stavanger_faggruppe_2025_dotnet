@@ -1,7 +1,7 @@
 using OpenAI.Chat;
-using SimpleMcpServer.Models;
+using McpWebClient.Models;
 
-namespace SimpleMcpServer.Services;
+namespace McpWebClient.Services;
 
 /// <summary>
 /// Converts MCP tool schemas to Azure OpenAI ChatTool format.

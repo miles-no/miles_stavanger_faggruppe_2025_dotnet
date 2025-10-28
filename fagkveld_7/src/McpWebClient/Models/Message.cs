@@ -1,4 +1,4 @@
-namespace SimpleMcpServer.Models;
+namespace McpWebClient.Models;
 
 /// <summary>
 /// Represents a single message in the chat conversation.
