@@ -1,0 +1,16 @@
+{
+    "servers": {
+        "Fagkveld-MCP-Server": {
+            "type": "stdio",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "/<path>/McpServer.csproj"
+            ],
+            "env": {
+                "DOTNET_CLI_TELEMETRY_OPTOUT": "1"
+            }
+         }
+    }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Chat - Azure AI Foundry</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>MCP Chat Interface</h1>
+            <div class="header-subtitle">Powered by Azure AI Foundry with MCP Tools</div>
+        </div>
+        <div class="api-key-section">
+            <input
+                type="password"
+                id="apiKeyInput"
+                class="api-key-input"
+                placeholder="Enter Azure AI Foundry API Key (optional)"
+            />
+        </div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <div class="welcome-message">
+            <h2>Welcome to MCP Chat</h2>
+            <p>I'm connected to Azure AI Foundry and have access to MCP tools.</p>
+            <div class="example-prompts">
+                <div class="example-prompt" onclick="sendExample('What time is it?')">
+                    What time is it?
+                </div>
+                <div class="example-prompt" onclick="sendExample('Can you tell me the current date and time?')">
+                    Can you tell me the current date and time?
+                </div>
+                <div class="example-prompt" onclick="sendExample('What tools do you have access to?')">
+                    What tools do you have access to?
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-wrapper">
+            <textarea
+                id="messageInput"
+                class="message-input"
+                placeholder="Send a message..."
+                rows="1"
+                onkeydown="handleKeyPress(event)"
+            ></textarea>
+            <button id="sendButton" class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>
