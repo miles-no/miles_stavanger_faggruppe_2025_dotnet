@@ -1,0 +1,515 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1756710445916
+  modified: 1756710445916
+  description: ""
+collection:
+  - name: KYC Migration Proxy
+    meta:
+      id: fld_70ece1d79ec94de8813d8fadba890f7e
+      created: 1762936532740
+      modified: 1762936532740
+      sortKey: -1762936532740
+      description: ""
+    children:
+      - name: Local
+        meta:
+          id: fld_ce94208147ac48dba7213de729d6abd0
+          created: 1762936574476
+          modified: 1763709016359
+          sortKey: -1762936560985
+          description: ""
+        authentication:
+          type: oauth2
+          grantType: client_credentials
+          accessTokenUrl: https://login.microsoftonline.com/{{TennantId}}/oauth2/v2.0/token
+          clientId: eeed7af4-206d-4d54-a166-ed84e9c5fd5b
+          clientSecret: 
+          scope: be8adbca-661c-440c-a118-4a3b8fe10ac7/.default
+          credentialsInBody: true
+      - name: Dev
+        meta:
+          id: fld_aaf8db299237442e896e829e1809d9d4
+          created: 1762954383808
+          modified: 1764574894333
+          sortKey: -1762936560885
+          description: ""
+        authentication:
+          type: oauth2
+          grantType: client_credentials
+          accessTokenUrl: https://login.microsoftonline.com/{{TennantId}}/oauth2/v2.0/token
+          clientId: eeed7af4-206d-4d54-a166-ed84e9c5fd5b
+          clientSecret: 
+          scope: be8adbca-661c-440c-a118-4a3b8fe10ac7/.default
+      - name: Prod
+        meta:
+          id: fld_5094888566fc4efabd0c7b5263d7672b
+          created: 1763544581817
+          modified: 1764680193907
+          sortKey: -1762936546812.5
+          description: ""
+        authentication:
+          type: oauth2
+          disabled: false
+          grantType: client_credentials
+          accessTokenUrl: https://login.microsoftonline.com/{{TennantId}}/oauth2/v2.0/token
+          clientId: 7b7aedae-ac30-4e0c-8bbb-e3dea26445e3
+          clientSecret: 
+          scope: 13d6caf6-99be-41cf-8c86-6460923fd68f/.default
+  - name: Entra ID
+    meta:
+      id: fld_6f2f5be245d846cca1301185ea51f0d2
+      created: 1763366903803
+      modified: 1763366903803
+      sortKey: -1763366903803
+      description: ""
+  - name: Deploy Proxy
+    meta:
+      id: fld_981849923aa14dc2a451e77b0e5d0965
+      created: 1763549085782
+      modified: 1763549085782
+      sortKey: -1763549085782
+      description: ""
+    children:
+      - name: Dev
+        meta:
+          id: fld_32f649f24940473997503e95c0ba5c91
+          created: 1763549240576
+          modified: 1763552265629
+          sortKey: -1763549100450
+          description: ""
+      - name: Prod
+        meta:
+          id: fld_6e7d319a22dc491a94ae8512d5a5e75e
+          created: 1763552254888
+          modified: 1763552264560
+          sortKey: -1763549100350
+          description: ""
+  - name: Miles
+    meta:
+      id: fld_dda3a506ce8b418693c2c7f454f0919f
+      created: 1764157198661
+      modified: 1764164388090
+      sortKey: -1764157198661
+      description: ""
+    children:
+      - name: Fagkveld 8
+        meta:
+          id: fld_94f285d83f4c4aa9b8659d922e15a515
+          created: 1764157217018
+          modified: 1764157217018
+          sortKey: -1764157217018
+          description: ""
+        children:
+          - url: https://graph.microsoft.com/v1.0/servicePrincipals/d3de4cd4-b1e4-4104-95b5-ec1210ec08ef/appRoleAssignedTo
+            name: Approve Role Assignment
+            meta:
+              id: req_55bb9706c4ed4e14b8279a5f7f359fdc
+              created: 1764157226770
+              modified: 1764161192633
+              isPrivate: false
+              description: ""
+              sortKey: -1764157229273
+            method: POST
+            body:
+              mimeType: application/json
+              text: >-
+                // Id in Url: Object Id of Enterprise application for server
+
+
+                // Principal Id: Object Id of Enterprise application for client
+
+                // Resource Id: Object Id of Enterprise application for server
+                (Same as url)
+
+                // App Role Id: found in manifest of server app registration
+
+
+
+                {
+                  "principalId": "973f163b-3138-4e0d-ad15-5193b8e9a07d",
+                  "resourceId": "d3de4cd4-b1e4-4104-95b5-ec1210ec08ef",
+                  "appRoleId": "f5ce695a-2043-43e7-8d2d-59bc7dadf134"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/12.0.0
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJub25jZSI6InhfeWJTMWVrcWhvbk9NSFFyRktDY2I1cEZEY1pjM0xac18wZVNlaEU0ejgiLCJhbGciOiJSUzI1NiIsIng1dCI6InJ0c0ZULWItN0x1WTdEVlllU05LY0lKN1ZuYyIsImtpZCI6InJ0c0ZULWItN0x1WTdEVlllU05LY0lKN1ZuYyJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNzUzNGFiM2UtNmQ1Mi00MjEzLTg0OTMtMWQ2NzRiNTI5NzI0LyIsImlhdCI6MTc2NDE1NjEzNywibmJmIjoxNzY0MTU2MTM3LCJleHAiOjE3NjQyNDI4MzcsImFjY3QiOjAsImFjciI6IjEiLCJhY3JzIjpbInAxIl0sImFpbyI6IkFXUUFtLzhhQUFBQWhJNVNiaFBzYmV4cStQOFlHdjNTY3Q4K0JVcEVWcFcrT0NKMW1uOFI5cVlMQ3lCWWZsRE5mRzNrMHRKb3h1SlFuWm96Y0hRU0FXNnZmd3ArNEZHMTRnMVBObFJnZFMvTXdnU1ZHeXZCT2VOS1gweFhVS2pZN0JaZFlwdnRGOUEyIiwiYW1yIjpbInB3ZCIsIm1mYSJdLCJhcHBfZGlzcGxheW5hbWUiOiJNaWNyb3NvZnRfQUFEX1JlZ2lzdGVyZWRBcHBzIiwiYXBwaWQiOiIxOGVkMzUwNy1hNDc1LTRjY2ItYjY2OS1kNjZiYzlmMmEzNmUiLCJhcHBpZGFjciI6IjAiLCJmYW1pbHlfbmFtZSI6IklobGUiLCJnaXZlbl9uYW1lIjoiSmFjb2IgVmV0bGUgS3Zpbm5zbGFuZCIsImlkdHlwIjoidXNlciIsImlwYWRkciI6IjYyLjEwMS4yMjEuNDYiLCJuYW1lIjoiSmFjb2IgVmV0bGUgS3Zpbm5zbGFuZCBJaGxlIiwib2lkIjoiMGNkZmJhYjYtN2E1Zi00YjhmLTg4ZjYtYTEzYmExMjM0YzliIiwicGxhdGYiOiI1IiwicHVpZCI6IjEwMDMyMDA0MzRCRDJDMEUiLCJyaCI6IjEuQVVjQVBxczBkVkp0RTBLRWt4MW5TMUtYSkFNQUFBQUFBQUFBd0FBQUFBQUFBQUFOQWRCSEFBLiIsInNjcCI6IkFkbWluaXN0cmF0aXZlVW5pdC5SZWFkLkFsbCBBZG1pbmlzdHJhdGl2ZVVuaXQuUmVhZFdyaXRlLkFsbCBBZ2VudENhcmRNYW5pZmVzdC5SZWFkLkFsbCBBZ2VudENhcmRNYW5pZmVzdC5SZWFkV3JpdGUuQWxsIEFnZW50Q29sbGVjdGlvbi5SZWFkLkFsbCBBZ2VudENvbGxlY3Rpb24uUmVhZC5HbG9iYWwgQWdlbnRDb2xsZWN0aW9uLlJlYWQuUXVhcmFudGluZWQgQWdlbnRDb2xsZWN0aW9uLlJlYWRXcml0ZS5BbGwgQWdlbnRDb2xsZWN0aW9uLlJlYWRXcml0ZS5HbG9iYWwgQWdlbnRDb2xsZWN0aW9uLlJlYWRXcml0ZS5RdWFyYW50aW5lZCBBZ2VudElkZW50aXR5LkVuYWJsZURpc2FibGUuQWxsIEFnZW50SWRlbnRpdHkuUmVhZC5BbGwgQWdlbnRJZGVudGl0eS5SZWFkV3JpdGUuQWxsIEFnZW50SWRlbnRpdHlCbHVlcHJpbnRQcmluY2lwYWwuRW5hYmxlRGlzYWJsZS5BbGwgQWdlbnRJZGVudGl0eUJsdWVwcmludFByaW5jaXBhbC5SZWFkLkFsbCBBZ2VudElkZW50aXR5Qmx1ZXByaW50UHJpbmNpcGFsLlJlYWRXcml0ZS5BbGwgQWdlbnRJbnN0YW5jZS5SZWFkLkFsbCBBZ2VudEluc3RhbmNlLlJlYWRXcml0ZS5BbGwgQXBwbGljYXRpb24uUmVhZC5BbGwgQXBwbGljYXRpb24uUmVhZFdyaXRlLkFsbCBBcHBSb2xlQXNzaWdubWVudC5SZWFkV3JpdGUuQWxsIEF1ZGl0TG9nLlJlYWQuQWxsIENyb3NzVGVuYW50SW5mb3JtYXRpb24uUmVhZEJhc2ljLkFsbCBDdXN0b21TZWNBdHRyaWJ1dGVBc3NpZ25tZW50LlJlYWRXcml0ZS5BbGwgQ3VzdG9tU2VjQXR0cmlidXRlRGVmaW5pdGlvbi5SZWFkV3JpdGUuQWxsIERlbGVnYXRlZFBlcm1pc3Npb25HcmFudC5SZWFkV3JpdGUuQWxsIERvbWFpbi5SZWFkLkFsbCBlbWFpbCBJZGVudGl0eVByb3ZpZGVyLlJlYWRXcml0ZS5BbGwgb3BlbmlkIE9yZ2FuaXphdGlvbi5SZWFkV3JpdGUuQWxsIFBvbGljeS5SZWFkLkFsbCBQb2xpY3kuUmVhZFdyaXRlLkFwcGxpY2F0aW9uQ29uZmlndXJhdGlvbiBQb2xpY3kuUmVhZFdyaXRlLk1vYmlsaXR5TWFuYWdlbWVudCBwcm9maWxlIFVzZXIuUmVhZCBVc2VyLlJlYWQuQWxsIiwic2lkIjoiMDA5YzQ3ZTktZTg4NS0zMTEzLWFjZTgtOWYxMTAzNzRkNGFjIiwic2lnbmluX3N0YXRlIjpbImttc2kiXSwic3ViIjoiQlpEVkZfR19acGZkN3F5SHBPdUJiOFB3UFZfRjc4U2dwMWNTOHhjUFphZyIsInRlbmFudF9yZWdpb25fc2NvcGUiOiJFVSIsInRpZCI6Ijc1MzRhYjNlLTZkNTItNDIxMy04NDkzLTFkNjc0YjUyOTcyNCIsInVuaXF1ZV9uYW1lIjoiamFjb2IuaWhsZUBtaWxlcy5ubyIsInVwbiI6ImphY29iLmlobGVAbWlsZXMubm8iLCJ1dGkiOiJVTTMzNHF3RVBVNmJuS0hXX0FNRkFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX2FjZCI6MTU0NzUwOTMxNSwieG1zX2FjdF9mY3QiOiIzIDUiLCJ4bXNfY2MiOlsiY3AxIl0sInhtc19mdGQiOiJOdVdDN0M3Tk5MaTcyOEN2NUFrSzh2aTNxcTdNSTVSaTF2LWhwcUNMcjI0QlpuSmhibU5sWXkxa2MyMXoiLCJ4bXNfaWRyZWwiOiIxIDE4IiwieG1zX3NzbSI6IjEiLCJ4bXNfc3QiOnsic3ViIjoieGZ0TXJELWZESkMzYW1veW9HcnUtc2RvWThKaTdmdUI5Y0hUcmtVTTVhcyJ9LCJ4bXNfc3ViX2ZjdCI6IjIgMyIsInhtc190Y2R0IjoxNDUzMTQ4NzQyLCJ4bXNfdGRiciI6IkVVIiwieG1zX3RudF9mY3QiOiIzIDEyIn0.rtaaRa__nRSu5Gai1UCqw-mw6Ijmfb90qHmvzhu_3SD3ZTq8qrrgT1b4y-V3A5giACZKrH88msqziwinog-E06m_jgkyJEC50aUEh5pBIpPEMEhQloLCRiqnhAlUTMkjRaDx956MyFegg_Ab2-mTvXy9VOVii7vAbChHdh65OZir6zQINvR1WyosikGoM2aOFysoZoF4WUt2iQhhTRjAgrzJCAXDZd7cTApq-33s3J9CqPTB6QiFOEdR5zT12ZJ-rIHoG1rsIzuML-aiqH9JBIc5hOSFwwBhf3wz-YGQwvz3tN0M6iOcImvo3dAuwSi-vVuQmbfuYTEn3bp7yfYDkQ
+              prefix: Bearer
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - name: Minimal API
+            meta:
+              id: fld_b3b9eea4c743439cac74746fb9cffb3c
+              created: 1764157737305
+              modified: 1764157740221
+              sortKey: -1764157229173
+              description: ""
+            children:
+              - url: https://localhost:7018/api/minimal/role-required
+                name: App role
+                meta:
+                  id: req_6038b048b8774c6b912f6d724ee410e1
+                  created: 1764157744475
+                  modified: 1764162254208
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764158508292
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: oauth2
+                  grantType: client_credentials
+                  accessTokenUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  authorizationUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  clientId: c984c62f-61ac-40e1-bff3-ec5a60028f17
+                  clientSecret: 
+                  scope: 82782ff4-f254-49b9-a58e-13c1673e9ac3/.default
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: https://localhost:7018/api/minimal/scope-required
+                name: Scope
+                meta:
+                  id: req_eafab06f11bd497fb02849531ec4bb71
+                  created: 1764158508242
+                  modified: 1764158957695
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764158508242
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: oauth2
+                  grantType: authorization_code
+                  accessTokenUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  authorizationUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/authorize
+                  clientId: 82782ff4-f254-49b9-a58e-13c1673e9ac3
+                  clientSecret: 
+                  scope: 82782ff4-f254-49b9-a58e-13c1673e9ac3/Scope.Test
+                  useDefaultBrowser: true
+                  usePkce: true
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: https://localhost:7018/api/minimal/authenticated
+                name: Authentication
+                meta:
+                  id: req_b007a80995574bbf8677a07f6eb0af88
+                  created: 1764159181402
+                  modified: 1764159360773
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764158508342
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: oauth2
+                  grantType: authorization_code
+                  accessTokenUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  authorizationUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/authorize
+                  clientId: 82782ff4-f254-49b9-a58e-13c1673e9ac3
+                  clientSecret: 
+                  scope: 82782ff4-f254-49b9-a58e-13c1673e9ac3/Scope.Test
+                  useDefaultBrowser: true
+                  usePkce: true
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: https://localhost:7018/api/minimal/public
+                name: Public
+                meta:
+                  id: req_44c6bc18b0704a329f12bfe18f4ff5d9
+                  created: 1764162265779
+                  modified: 1764162281931
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764162265779
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Controller API
+            meta:
+              id: fld_4abaa160e2724baf9b50903de93f431d
+              created: 1764158295101
+              modified: 1764158295101
+              sortKey: -1764157223095.5
+              description: ""
+            children:
+              - url: https://localhost:7018/api/minimal/role-required
+                name: App role
+                meta:
+                  id: req_208a449801324a03a4b4cb2f17f3b941
+                  created: 1764159336101
+                  modified: 1764162172822
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764157744575
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: oauth2
+                  grantType: client_credentials
+                  accessTokenUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  authorizationUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  clientId: c984c62f-61ac-40e1-bff3-ec5a60028f17
+                  clientSecret: 
+                  scope: 82782ff4-f254-49b9-a58e-13c1673e9ac3/.default
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: https://localhost:7018/api/controller/authenticated
+                name: Authentication
+                meta:
+                  id: req_01b6e36dc6cb483a83eccd49e62f94b5
+                  created: 1764159340517
+                  modified: 1764159372511
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764157744675
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: oauth2
+                  grantType: authorization_code
+                  accessTokenUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  authorizationUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/authorize
+                  clientId: 82782ff4-f254-49b9-a58e-13c1673e9ac3
+                  clientSecret: 
+                  scope: 82782ff4-f254-49b9-a58e-13c1673e9ac3/Scope.Test
+                  useDefaultBrowser: true
+                  usePkce: true
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: https://localhost:7018/api/controller/scope-required
+                name: Scope
+                meta:
+                  id: req_b7c855cde50e4e49a7b1b37e1b1d87d8
+                  created: 1764159346430
+                  modified: 1764159437145
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764157744525
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: oauth2
+                  grantType: authorization_code
+                  accessTokenUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/token
+                  authorizationUrl: https://login.microsoftonline.com/7534ab3e-6d52-4213-8493-1d674b529724/oauth2/v2.0/authorize
+                  clientId: 82782ff4-f254-49b9-a58e-13c1673e9ac3
+                  clientSecret: 
+                  scope: 82782ff4-f254-49b9-a58e-13c1673e9ac3/Scope.Test
+                  useDefaultBrowser: true
+                  usePkce: true
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: https://localhost:7018/api/controller/public
+                name: Public
+                meta:
+                  id: req_0cff3bff263d4eadb0a64de44381efb8
+                  created: 1764162285043
+                  modified: 1764162293877
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1764157744775
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.1.0
+                    description: ""
+                    disabled: false
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1756710455279
+    modified: 1765193689173
+  cookies:
+    - id: a770bd7c-54cf-4bf9-bf9a-1a2ef9d908ac
+      key: ARRAffinity
+      value: 3d3e8677b472c7425bdb8347bc62ebdd569a1f6ceaa26725d6ac591a1d8353cd
+      domain: kyc-migr-proxy-dev-app.azurewebsites.net
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: false
+    - id: 8522fdbf-5813-48ab-b288-83888bcd807d
+      key: ARRAffinitySameSite
+      value: 3d3e8677b472c7425bdb8347bc62ebdd569a1f6ceaa26725d6ac591a1d8353cd
+      domain: kyc-migr-proxy-dev-app.azurewebsites.net
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: false
+    - id: cd31b897-9437-4d2d-8af7-e98c04159793
+      key: fpc
+      value: AkmbLw2HbUBOhU__SQjnJLhMdOZbAQAAANDXxOAOAAAA
+      domain: login.microsoftonline.com
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+    - id: ebea5d70-7078-481d-ab3c-c6d9d890b0a1
+      key: x-ms-gateway-slice
+      value: estsfd
+      domain: login.microsoftonline.com
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+    - id: 601ebcd2-4b48-482e-bdca-21632fef025d
+      key: stsservicecookie
+      value: estsfd
+      domain: login.microsoftonline.com
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+    - id: cd9c1cf5-09eb-44be-bb87-793726427d02
+      key: ARRAffinity
+      value: cbc831ce47266eb6d483c838d82ace921a429d976bcf91839973f3abcbd2e75c
+      domain: kyc-migr-proxy-prod-app.azurewebsites.net
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: false
+    - id: 70a305d0-2046-45bf-9add-6d9098f93a56
+      key: ARRAffinitySameSite
+      value: cbc831ce47266eb6d483c838d82ace921a429d976bcf91839973f3abcbd2e75c
+      domain: kyc-migr-proxy-prod-app.azurewebsites.net
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: false
+    - id: 14097647-84e7-40bc-a860-285166e03722
+      key: CookieConsentPolicy
+      value: 0:1
+      domain: deploy-proxy.ksp.stoe.cloud
+      path: /
+      secure: true
+      httpOnly: false
+      hostOnly: true
+    - id: 8cbd8dbc-28bf-4a02-8590-ff75660d4279
+      key: LSKey-c$CookieConsentPolicy
+      value: 0:1
+      domain: deploy-proxy.ksp.stoe.cloud
+      path: /
+      secure: true
+      httpOnly: false
+      hostOnly: true
+    - id: e170d822-3d83-46fe-b814-75af2dcd724a
+      key: CookieConsentPolicy
+      value: 0:1
+      domain: deploy-proxy-dev.ksp-stoedev.cloud
+      path: /
+      secure: true
+      httpOnly: false
+      hostOnly: true
+    - id: e5001b70-eb77-4d07-890b-2b47887addaf
+      key: LSKey-c$CookieConsentPolicy
+      value: 0:1
+      domain: deploy-proxy-dev.ksp-stoedev.cloud
+      path: /
+      secure: true
+      httpOnly: false
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1756710455278
+    modified: 1763552138029
+    isPrivate: false
+  data:
+    TennantId: 08a02467-3604-46e9-b818-6be676cf015b
+    DeployProxyTokenDev: 695c973c-a8c1-49d9-8238-f8f4af4eb0db
+    DeployProxyTokenProd: 72604e7c-f97c-44a3-9330-9ab479e6fb40
